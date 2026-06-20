@@ -1,5 +1,5 @@
 """
-backend/services/transaction_engine.py
+services/transaction_engine.py
 Motor de categorização de gastos e regras de negócio financeiras.
 
 Responsabilidades:
@@ -22,10 +22,10 @@ from typing import Optional
 from sqlalchemy import and_, extract, func
 from sqlalchemy.orm import Session
 
-from backend.core.logging import get_logger
-from backend.core.security import get_encryptor
-from backend.models.db_models import Account, Transaction
-from backend.schemas.pluggy_schemas import CashflowOut
+from core.logging import get_logger
+from core.security import get_encryptor
+from models.db_models import Account, Transaction
+from schemas.pluggy_schemas import CashflowOut
 
 logger = get_logger(__name__)
 

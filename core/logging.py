@@ -1,5 +1,5 @@
 """
-backend/core/logging.py
+core/logging.py
 Logging estruturado com mascaramento automático de PII.
 
 Usa structlog para produzir logs JSON (produção) ou coloridos (dev),
@@ -14,7 +14,7 @@ import sys
 
 import structlog
 
-from backend.core.security import mask_pii
+from core.security import mask_pii
 
 
 # =====================================================================

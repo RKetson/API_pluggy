@@ -1,5 +1,5 @@
 """
-backend/services/sync_service.py
+services/sync_service.py
 Orquestrador de sincronização de dados entre a Pluggy e o banco local.
 
 Dois modos de operação:
@@ -18,9 +18,9 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from backend.core.logging import get_logger
-from backend.core.security import get_encryptor
-from backend.models.db_models import (
+from core.logging import get_logger
+from core.security import get_encryptor
+from models.db_models import (
     Account,
     Investment,
     InvestmentTransaction,
@@ -28,8 +28,8 @@ from backend.models.db_models import (
     SyncLog,
     Transaction,
 )
-from backend.services.pluggy_service import PluggyService, PluggyServiceError
-from backend.services.transaction_engine import TransactionEngine
+from services.pluggy_service import PluggyService, PluggyServiceError
+from services.transaction_engine import TransactionEngine
 
 logger = get_logger(__name__)
 
@@ -316,9 +316,15 @@ class SyncService:
             db_acc = session.query(Account).get(acc_id)
 
             # Extrair e criptografar PII do owner
-            owner = data.get("owner") or {}
-            owner_name = owner.get("name", "")
-            owner_doc = owner.get("document", "") or owner.get("taxNumber", "")
+            owner = data.get("owner")
+            owner_name = ""
+            owner_doc = data.get("taxNumber", "")
+
+            if isinstance(owner, str):
+                owner_name = owner
+            elif isinstance(owner, dict):
+                owner_name = owner.get("name", "")
+                owner_doc = owner.get("document", "") or owner.get("taxNumber", "") or owner_doc
 
             if db_acc is None:
                 db_acc = Account(

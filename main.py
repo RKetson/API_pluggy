@@ -1,5 +1,5 @@
 """
-backend/main.py
+main.py
 Entry point da aplicação FastAPI — Analisador Financeiro.
 
 Inicializa:
@@ -18,10 +18,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.api.routes import router as api_router
-from backend.core.config import get_settings
-from backend.core.database import init_db
-from backend.core.logging import get_logger, setup_logging
+from api.routes import router as api_router
+from core.config import get_settings
+from core.database import init_db
+from core.logging import get_logger, setup_logging
 
 
 # =====================================================================
@@ -69,9 +69,9 @@ def _start_scheduler(interval_minutes: int):
     """Inicia APScheduler para sincronização periódica."""
     from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-    from backend.core.database import get_db_session
-    from backend.models.db_models import PluggyItem
-    from backend.services.sync_service import SyncService
+    from core.database import get_db_session
+    from models.db_models import PluggyItem
+    from services.sync_service import SyncService
 
     scheduler = AsyncIOScheduler()
 

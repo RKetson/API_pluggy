@@ -1,10 +1,10 @@
 """
-backend/models/db_models.py
+models/db_models.py
 Modelos SQLAlchemy ORM para o banco de dados do consolidador financeiro.
 
 Campos sensíveis (CPF, nome do titular, número de conta) são armazenados
 como LargeBinary (BLOB) após criptografia Fernet. Utilize as funções
-de backend.core.security para encrypt/decrypt ao ler/escrever.
+de core.security para encrypt/decrypt ao ler/escrever.
 
 Tabelas:
     - pluggy_items: Conexões com instituições financeiras

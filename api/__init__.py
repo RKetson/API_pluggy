@@ -1,1 +1,1 @@
-# backend/api — Endpoints REST (FastAPI routes).
+# api — Endpoints REST (FastAPI routes).

@@ -1,5 +1,5 @@
 """
-backend/core/config.py
+core/config.py
 Configurações centrais carregadas via variáveis de ambiente (.env).
 
 Utiliza pydantic-settings para validação de tipos e falha rápida
@@ -29,9 +29,9 @@ DATA_DIR = _PROJECT_ROOT / "data"
 
 
 class Settings(BaseSettings):
-    """Configurações validadas do backend.
+    """Configurações validadas do 
 
-    Valores são lidos do .env na raiz de backend/ ou de variáveis
+    Valores são lidos do .env na raiz de  ou de variáveis
     de ambiente do sistema operacional.
     """
 

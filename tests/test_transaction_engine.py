@@ -1,5 +1,5 @@
 """
-backend/tests/test_transaction_engine.py
+tests/test_transaction_engine.py
 Testes unitários para o motor de categorização e regras de negócio.
 
 Testa:
@@ -16,8 +16,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from backend.models.db_models import Account, Transaction
-from backend.services.transaction_engine import TransactionEngine
+from models.db_models import Account, Transaction
+from services.transaction_engine import TransactionEngine
 
 
 # =====================================================================
@@ -41,7 +41,7 @@ def _make_txn(
     custom_category: str | None = None,
 ) -> Transaction:
     """Helper para criar transações de teste."""
-    txn = Transaction.__new__(Transaction)
+    txn = Transaction()
     txn.id = id
     txn.account_id = account_id
     txn.date = txn_date
@@ -69,7 +69,7 @@ def _make_acc(
     owner_doc_encrypted: bytes | None = None,
 ) -> Account:
     """Helper para criar contas de teste."""
-    acc = Account.__new__(Account)
+    acc = Account()
     acc.id = id
     acc.item_id = item_id
     acc.type = acc_type

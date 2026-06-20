@@ -1,5 +1,5 @@
 """
-backend/schemas/pluggy_schemas.py
+schemas/pluggy_schemas.py
 Schemas Pydantic para validação de dados de request/response.
 
 Divide-se em:
@@ -194,10 +194,10 @@ class InvestmentOut(BaseModel):
     type: Optional[str] = None
     subtype: Optional[str] = None
     code: Optional[str] = None
-    quantity: float = 0.0
-    amount: float = 0.0
-    amount_original: float = 0.0
-    amount_profit: float = 0.0
+    quantity: Optional[float] = 0.0
+    amount: Optional[float] = 0.0
+    amount_original: Optional[float] = 0.0
+    amount_profit: Optional[float] = 0.0
     rate: Optional[float] = None
     rate_type: Optional[str] = None
     annual_rate: Optional[float] = None

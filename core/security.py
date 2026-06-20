@@ -1,5 +1,5 @@
 """
-backend/core/security.py
+core/security.py
 Camada de segurança: criptografia de campos sensíveis (PII) em repouso
 e utilitários de mascaramento para logs.
 
@@ -69,7 +69,7 @@ class FieldEncryptor:
 @lru_cache(maxsize=1)
 def get_encryptor() -> FieldEncryptor:
     """Retorna singleton do encryptor com a chave do .env."""
-    from backend.core.config import get_settings
+    from core.config import get_settings
     return FieldEncryptor(get_settings().db_encryption_key)
 
 

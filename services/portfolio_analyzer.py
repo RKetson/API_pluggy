@@ -1,5 +1,5 @@
 """
-backend/services/portfolio_analyzer.py
+services/portfolio_analyzer.py
 Análise de rentabilidade e consolidação da carteira de investimentos.
 
 Calcula:
@@ -22,9 +22,9 @@ import numpy as np
 from scipy.optimize import brentq
 from sqlalchemy.orm import Session
 
-from backend.core.logging import get_logger
-from backend.models.db_models import Investment, InvestmentTransaction
-from backend.schemas.pluggy_schemas import (
+from core.logging import get_logger
+from models.db_models import Investment, InvestmentTransaction
+from schemas.pluggy_schemas import (
     InvestmentReturnOut,
     PortfolioSummaryOut,
 )

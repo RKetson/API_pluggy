@@ -1,1 +1,1 @@
-# backend/tests — Testes unitários e de integração.
+# tests — Testes unitários e de integração.

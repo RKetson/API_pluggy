@@ -1,5 +1,5 @@
 """
-backend/tests/test_portfolio_analyzer.py
+tests/test_portfolio_analyzer.py
 Testes unitários para o analisador de rentabilidade de carteira.
 
 Testa:
@@ -16,8 +16,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from backend.models.db_models import Investment, InvestmentTransaction
-from backend.services.portfolio_analyzer import PortfolioAnalyzer
+from models.db_models import Investment, InvestmentTransaction
+from services.portfolio_analyzer import PortfolioAnalyzer
 
 
 # =====================================================================
@@ -42,7 +42,7 @@ def _make_investment(
     created_at: datetime = None,
 ) -> Investment:
     """Helper para criar investimento de teste."""
-    inv = Investment.__new__(Investment)
+    inv = Investment()
     inv.id = id
     inv.item_id = item_id
     inv.name = name
@@ -65,7 +65,7 @@ def _make_inv_txn(
     quantity: float = 1.0,
 ) -> InvestmentTransaction:
     """Helper para criar movimentação de investimento."""
-    txn = InvestmentTransaction.__new__(InvestmentTransaction)
+    txn = InvestmentTransaction()
     txn.id = id
     txn.investment_id = investment_id
     txn.type = txn_type

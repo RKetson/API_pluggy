@@ -1,5 +1,5 @@
 """
-backend/core/database.py
+core/database.py
 Engine SQLAlchemy e gerenciamento de sessão para SQLite.
 
 O banco vive em data/pluggy_db.sqlite (mesmo diretório de dados do
@@ -15,7 +15,7 @@ from typing import Generator
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 
-from backend.core.config import get_settings
+from core.config import get_settings
 
 # =====================================================================
 # Engine singleton
@@ -119,7 +119,7 @@ def init_db() -> None:
     Importa os modelos para registrar no metadata do Base e então
     executa create_all().
     """
-    from backend.models.db_models import Base  # noqa: F401 — registra modelos
+    from models.db_models import Base  # noqa: F401 — registra modelos
 
     engine = _get_engine()
     Base.metadata.create_all(bind=engine)

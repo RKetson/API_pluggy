@@ -1,5 +1,5 @@
 """
-backend/api/routes.py
+api/routes.py
 Endpoints REST do Analisador Financeiro.
 
 Todos os endpoints retornam dados via Pydantic schemas e utilizam
@@ -14,16 +14,16 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from backend.core.database import get_db_session_dependency
-from backend.core.logging import get_logger
-from backend.models.db_models import (
+from core.database import get_db_session_dependency
+from core.logging import get_logger
+from models.db_models import (
     Account,
     Investment,
     PluggyItem,
     SyncLog,
     Transaction,
 )
-from backend.schemas.pluggy_schemas import (
+from schemas.pluggy_schemas import (
     AccountOut,
     CashflowOut,
     CashflowSummaryOut,
@@ -38,10 +38,10 @@ from backend.schemas.pluggy_schemas import (
     SyncStatusOut,
     TransactionOut,
 )
-from backend.services.pluggy_service import PluggyService, PluggyServiceError
-from backend.services.portfolio_analyzer import PortfolioAnalyzer
-from backend.services.sync_service import SyncService
-from backend.services.transaction_engine import TransactionEngine
+from services.pluggy_service import PluggyService, PluggyServiceError
+from services.portfolio_analyzer import PortfolioAnalyzer
+from services.sync_service import SyncService
+from services.transaction_engine import TransactionEngine
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/v1", tags=["Financial Analyzer"])

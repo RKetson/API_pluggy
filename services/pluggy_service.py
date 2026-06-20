@@ -1,5 +1,5 @@
 """
-backend/services/pluggy_service.py
+services/pluggy_service.py
 Client HTTP assíncrono para comunicação com a API da Pluggy.ai.
 
 Gerencia:
@@ -20,9 +20,9 @@ from typing import Any, Optional
 
 import httpx
 
-from backend.core.config import get_settings
-from backend.core.logging import get_logger
-from backend.core.security import mask_pii
+from core.config import get_settings
+from core.logging import get_logger
+from core.security import mask_pii
 
 logger = get_logger(__name__)
 
@@ -273,17 +273,13 @@ class PluggyService:
         account_id: str,
         from_date: str | None = None,
         to_date: str | None = None,
-        page_size: int = 500,
     ) -> list[dict]:
-        """Lista TODAS as transações de uma conta, com paginação automática.
-
-        Implementa paginação por cursor conforme recomendação da Pluggy.
+        """Lista TODAS as transações de uma conta, com paginação por cursor (v2).
 
         Args:
             account_id: ID da conta.
             from_date: Data inicial (YYYY-MM-DD).
             to_date: Data final (YYYY-MM-DD).
-            page_size: Tamanho de cada página (max 500).
 
         Returns:
             Lista completa de transações.
@@ -291,24 +287,22 @@ class PluggyService:
         all_transactions: list[dict] = []
         params: dict[str, Any] = {
             "accountId": account_id,
-            "pageSize": min(page_size, 500),
         }
         if from_date:
             params["from"] = from_date
         if to_date:
             params["to"] = to_date
 
-        page = 1
         while True:
-            params["page"] = page
-            data = await self._request("GET", "/transactions", params=params)
+            data = await self._request("GET", "/v2/transactions", params=params)
             results = data.get("results", [])
             all_transactions.extend(results)
 
-            total_pages = data.get("totalPages", 1)
-            if page >= total_pages:
+            next_cursor = data.get("next")
+            if not next_cursor:
                 break
-            page += 1
+            
+            params["cursor"] = next_cursor
 
         logger.info(
             "pluggy_transactions",

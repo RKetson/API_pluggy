@@ -1,1 +1,1 @@
-# backend/models — Modelos ORM (SQLAlchemy) do banco de dados.
+# models — Modelos ORM (SQLAlchemy) do banco de dados.
